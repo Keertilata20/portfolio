@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 function App() {
   const styles = `
 @keyframes fadeIn {
@@ -130,7 +132,7 @@ return (
   letterSpacing: "1px",
   fontSize: "18px"
 }}>
-  KL<span style={{ color: "#E6F1F5" }}> Systems</span>
+  KLC<span style={{ color: "#E6F1F5" }}> Systems</span>
 </h3>
 
   <div style={{ display: "flex", gap: "25px" }}>
@@ -529,8 +531,10 @@ boxShadow: "0 0 60px rgba(0,245,212,0.08)"
   margin: "60px auto",
   background: "linear-gradient(to right, transparent, rgba(0,245,212,0.3), transparent)"
 }} />
-      {/* CONTACT */}
-  <div id="contact" className="reveal" style={{
+
+
+ {/* CONTACT */}
+<div id="contact" className="reveal" style={{
   marginTop: "120px",
   textAlign: "center",
   opacity: 0,
@@ -551,66 +555,101 @@ boxShadow: "0 0 60px rgba(0,245,212,0.08)"
     flexWrap: "wrap"
   }}>
 
-    {[
-      {
-        name: "LinkedIn",
-        icon: "🔗",
-        link: "https://www.linkedin.com/in/keerti-lata-choudhury-20oct2005/"
-      },
-      {
-        name: "GitHub",
-        icon: "💻",
-        link: "https://github.com/Keertilata20"
-      },
-      {
-        name: "Email",
-        icon: "📧",
-        link: "mailto:keerti150226@gmail.com"
-      }
-    ].map((item, i) => (
-
-      <div
-        key={i}
-        onClick={() => window.open(item.link, "_blank")}
-        style={{
-          width: "160px",
-          height: "120px",
-          background: "rgba(19, 47, 58, 0.6)",
-          borderRadius: "16px",
-          backdropFilter: "blur(10px)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          cursor: "pointer",
-          transition: "all 0.3s ease",
-          boxShadow: "0 0 20px rgba(0,245,212,0.08)",
-          position: "relative"
-        }}
-
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "translateY(-8px) scale(1.05)";
-          e.currentTarget.style.boxShadow = "0 0 40px rgba(0,245,212,0.25)";
-        }}
-
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "translateY(0) scale(1)";
-          e.currentTarget.style.boxShadow = "0 0 20px rgba(0,245,212,0.08)";
-        }}
-      >
-
-        <div style={{ fontSize: "26px" }}>{item.icon}</div>
-
-        <div style={{
-          marginTop: "10px",
-          fontWeight: "bold",
-          color: "#E6F1F5"
-        }}>
-          {item.name}
-        </div>
-
+    {/* LINKEDIN */}
+    <div
+      onClick={() => window.open("https://www.linkedin.com/in/keerti-lata-choudhury-20oct2005/", "_blank")}
+      style={{
+        width: "160px",
+        height: "120px",
+        background: "rgba(19, 47, 58, 0.6)",
+        borderRadius: "16px",
+        backdropFilter: "blur(10px)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        cursor: "pointer",
+        transition: "all 0.3s ease",
+        boxShadow: "0 0 20px rgba(0,245,212,0.08)"
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-8px) scale(1.05)";
+        e.currentTarget.style.boxShadow = "0 0 40px rgba(0,245,212,0.25)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0) scale(1)";
+        e.currentTarget.style.boxShadow = "0 0 20px rgba(0,245,212,0.08)";
+      }}
+    >
+      <FaLinkedin size={28} color="#00F5D4" />
+      <div style={{ marginTop: "10px", color: "#E6F1F5", fontWeight: "bold" }}>
+        LinkedIn
       </div>
-    ))}
+    </div>
+
+    {/* GITHUB */}
+    <div
+      onClick={() => window.open("https://github.com/Keertilata20", "_blank")}
+      style={{
+        width: "160px",
+        height: "120px",
+        background: "rgba(19, 47, 58, 0.6)",
+        borderRadius: "16px",
+        backdropFilter: "blur(10px)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        cursor: "pointer",
+        transition: "all 0.3s ease",
+        boxShadow: "0 0 20px rgba(0,245,212,0.08)"
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-8px) scale(1.05)";
+        e.currentTarget.style.boxShadow = "0 0 40px rgba(0,245,212,0.25)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0) scale(1)";
+        e.currentTarget.style.boxShadow = "0 0 20px rgba(0,245,212,0.08)";
+      }}
+    >
+      <FaGithub size={28} color="#00F5D4" />
+      <div style={{ marginTop: "10px", color: "#E6F1F5", fontWeight: "bold" }}>
+        GitHub
+      </div>
+    </div>
+
+    {/* EMAIL */}
+    <div
+      onClick={() => window.location.href = "mailto:keerti150226@gmail.com"}
+      style={{
+        width: "160px",
+        height: "120px",
+        background: "rgba(19, 47, 58, 0.6)",
+        borderRadius: "16px",
+        backdropFilter: "blur(10px)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        cursor: "pointer",
+        transition: "all 0.3s ease",
+        boxShadow: "0 0 20px rgba(0,245,212,0.08)"
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-8px) scale(1.05)";
+        e.currentTarget.style.boxShadow = "0 0 40px rgba(0,245,212,0.25)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0) scale(1)";
+        e.currentTarget.style.boxShadow = "0 0 20px rgba(0,245,212,0.08)";
+      }}
+    >
+      <MdEmail size={28} color="#00F5D4" />
+      <div style={{ marginTop: "10px", color: "#E6F1F5", fontWeight: "bold" }}>
+        Email
+      </div>
+    </div>
 
   </div>
 </div>
