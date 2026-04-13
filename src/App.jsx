@@ -190,12 +190,12 @@ margin: "0 auto",
         </h1>
 
        <h3 style={{ color: "#00F5D4" }}>
-  AI Security Systems • Behavioural Intelligence • Adaptive Trust
+  AI Developer focused on Security, Behaviour & Intelligent Systems
 </h3>
 
-        <p style={{ opacity: 0.8,lineHeight: "1.6" }}>
-          Building intelligent systems that observe, adapt and verify.
-        </p>
+<p style={{ opacity: 0.8, lineHeight: "1.6" }}>
+  Building adaptive systems that observe, learn, and respond in real time.
+</p>
         <p style={{
   marginTop: "8px",
   fontSize: "14px",
@@ -238,7 +238,7 @@ onMouseLeave={(e) => {
    e.target.style.transform = "scale(1)";
 }}
   >
-    Explore Systems →
+    View My Work
   </a>
 </div>
       {/* TALKSPACE */}
@@ -253,6 +253,10 @@ onMouseLeave={(e) => {
   transition: "all 0.8s ease"
       }}>
         <h2 style={{ color: "#E6F1F5" }}>🧠 TalkSpace AI</h2>
+
+        <p style={{ fontSize: "13px", opacity: 0.7 }}>
+  Tech: Streamlit • NLP • Emotion Detection
+</p>
 
         <p style={{ opacity: 0.8,lineHeight: "1.6" }}>
           Emotion-aware conversational system that adapts based on user behaviour.
@@ -324,7 +328,12 @@ onMouseLeave={(e) => {
       },
       {
         title: "Development",
-        items: ["React", "FastAPI", "Data Analysis", "NLP"]
+        items: [
+  "React (Frontend)",
+  "FastAPI (Backend)",
+  "NLP (ML)",
+  "Data Analysis (Python)"
+]
       }
     ];
 
@@ -350,13 +359,12 @@ onMouseLeave={(e) => {
               boxShadow: "0 0 15px rgba(0,245,212,0.08)"
             }}
 
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-5px)";
-              e.currentTarget.style.boxShadow = "0 0 25px rgba(0,245,212,0.2)";
-            }}
-
+           
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
+            
+  e.currentTarget.style.transform = "rotateX(0) rotateY(0) scale(1)";
+  e.currentTarget.style.transition = "all 0.3s ease";
+
               e.currentTarget.style.boxShadow = "0 0 15px rgba(0,245,212,0.08)";
             }}
           >
@@ -543,9 +551,9 @@ boxShadow: "0 0 60px rgba(0,245,212,0.08)"
 }}>
   <h2 style={{ color: "#E6F1F5" }}>📡 Connect</h2>
 
-  <p style={{ opacity: 0.6 }}>
-    Open to collaborations, ideas, and AI system building
-  </p>
+ <p style={{ opacity: 0.7 }}>
+  Open to internships, collaborations, and AI system development
+</p>
 
   <div style={{
     display: "flex",
