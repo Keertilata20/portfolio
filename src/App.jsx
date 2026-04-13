@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { useState } from "react";
+
+
+
 function App() {
+  const [activeIndex, setActiveIndex] = useState(null);
   const styles = `
 @keyframes fadeIn {
   from {
@@ -26,6 +31,7 @@ const navLinkStyle = {
   {
     title: "Zero Trust Auth",
     desc: "Behavioural authentication system",
+    details:"Continuously verifies users based on typing speed, interaction patterns, and behavioural signals to prevent unauthorized access.",
     tech: "ML • Behavioural Biometrics",
     status: "Active",
     impact: "Adaptive trust scoring",
@@ -35,6 +41,9 @@ const navLinkStyle = {
   {
     title: "AI Phish Guard",
     desc: "Phishing detection system",
+    details:
+      "Analyzes URLs, email content, and patterns using NLP to detect phishing attempts in real-time.",
+    image: "/demo2.gif",
     tech: "NLP • Threat Detection",
     status: "Scanning",
     impact: "Explainable risk engine",
@@ -453,82 +462,102 @@ boxShadow: "0 0 60px rgba(0,245,212,0.08)"
           {modules.map((item, index) => (
             <div
   key={index}
+  onClick={() => {
+    setActiveIndex(activeIndex === index ? null : index);
+  }}
   style={{
     background: "#132F3A",
     padding: "25px",
     borderRadius: "16px",
     boxShadow: "0 0 30px rgba(0,245,212,0.08)",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease",
-    transformStyle: "preserve-3d",
+    transition: "all 0.3s ease",
     cursor: "pointer"
   }}
-
-  onMouseMove={(e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = -(y - centerY) / 20;
-    const rotateY = (x - centerX) / 20;
-
-    e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-    e.currentTarget.style.boxShadow = "0 0 40px rgba(0,245,212,0.25)";
-  }}
-
-  onMouseLeave={(e) => {
-    e.currentTarget.style.transform = "rotateX(0) rotateY(0) scale(1)";
-  }}
 >
-              <p style={{ fontSize: "12px", color: "#00F5D4" }}>
-  {item.tech}
-</p>
 
-<p style={{ fontSize: "12px", opacity: 0.6 }}>
-  Status: {item.status}
-</p>
+  <p style={{ fontSize: "12px", color: "#00F5D4" }}>
+    {item.tech}
+  </p>
 
-<p style={{ fontSize: "13px", marginTop: "8px" }}>
-  {item.impact}
-</p>
-              <h4 style={{ color: "#E6F1F5",transform: "translateZ(20px)" }}>{item.title}</h4>
-              <p style={{ opacity: 0.8, lineHeight: "1.6"}}>{item.desc}</p>
-              
+  <p style={{ fontSize: "12px", opacity: 0.6 }}>
+    Status: {item.status}
+  </p>
 
-              <div style={{ marginTop: "15px" }}>
-                {item.live && (
-                  <button
-                    onClick={() => window.open(item.live, "_blank")}
-                    style={{
-                      marginRight: "10px",
-                      padding: "6px 12px",
-                      background: "#00F5D4",
-                      border: "none",
-                      borderRadius: "6px",
-                      cursor: "pointer"
-                    }}
-                  >
-                    Live
-                  </button>
-                )}
+  <h4 style={{ color: "#E6F1F5" }}>
+    {item.title}
+  </h4>
 
-                <button
-                  onClick={() => window.open(item.code, "_blank")}
-                  style={{
-                    padding: "6px 12px",
-                    background: "#1F4D5A",
-                    border: "none",
-                    borderRadius: "6px",
-                    color: "white",
-                    cursor: "pointer"
-                  }}
-                >
-                  Code
-                </button>
-              </div>
-            </div>
+  <p style={{ opacity: 0.8, lineHeight: "1.6" }}>
+    {item.desc}
+  </p>
+
+  {/* 🔥 EXPAND SECTION */}
+  {activeIndex === index && (
+    <div style={{
+      marginTop: "15px",
+      padding: "15px",
+      background: "rgba(0,0,0,0.25)",
+      borderRadius: "10px",
+      textAlign: "left"
+    }}>
+      <p style={{ fontSize: "14px", opacity: 0.85 }}>
+        {item.details}
+      </p>
+
+      {item.image && (
+        <img
+          src={item.image}
+          alt="project"
+          style={{
+            width: "100%",
+            marginTop: "10px",
+            borderRadius: "8px"
+          }}
+        />
+      )}
+    </div>
+  )}
+
+  {/* BUTTONS */}
+  <div style={{ marginTop: "15px" }}>
+    {item.live && (
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          window.open(item.live, "_blank");
+        }}
+        style={{
+          marginRight: "10px",
+          padding: "6px 12px",
+          background: "#00F5D4",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer"
+        }}
+      >
+        Live
+      </button>
+    )}
+
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        window.open(item.code, "_blank");
+      }}
+      style={{
+        padding: "6px 12px",
+        background: "#1F4D5A",
+        border: "none",
+        borderRadius: "6px",
+        color: "white",
+        cursor: "pointer"
+      }}
+    >
+      Code
+    </button>
+  </div>
+
+</div>
           ))}
 
         </div>
