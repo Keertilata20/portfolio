@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useState } from "react";
+import { useRef } from "react";
 
 
 
 function App() {
+  const previewRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(null);
   const styles = `
 @keyframes fadeIn {
@@ -18,6 +20,18 @@ function App() {
     transform: translateY(0);
   }
 }
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 `;
 const navLinkStyle = {
    color: "#E6F1F5",
@@ -32,6 +46,7 @@ const navLinkStyle = {
     title: "Zero Trust Auth",
     desc: "Behavioural authentication system",
     details:"Continuously verifies users based on typing speed, interaction patterns, and behavioural signals to prevent unauthorized access.",
+    image: "/Auth.gif",
     tech: "ML • Behavioural Biometrics",
     status: "Active",
     impact: "Adaptive trust scoring",
@@ -43,7 +58,7 @@ const navLinkStyle = {
     desc: "Phishing detection system",
     details:
       "Analyzes URLs, email content, and patterns using NLP to detect phishing attempts in real-time.",
-    image: "/demo2.gif",
+    image: "/Phish.gif",
     tech: "NLP • Threat Detection",
     status: "Scanning",
     impact: "Explainable risk engine",
@@ -53,6 +68,7 @@ const navLinkStyle = {
   {
     title: "AI Finance Agent",
     desc: "Intelligent financial assistant leveraging data-driven insights",
+  details: "Allows users to upload financial documents and interact with an AI-powered system to understand spending patterns, generate trends, and receive improvement suggestions",
   tech: "Data Analysis • Predictive AI",
   status: "Advising",
   impact: "Personalized recommendations & trend analysis",
@@ -442,126 +458,213 @@ onMouseLeave={(e) => {
 
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gridTemplateColumns: "repeat(3, 1fr)",
          gap: "30px",
           maxWidth: "900px",
           margin: "auto",
            opacity: 0,
            animation: `fadeIn 0.6s ease forwards`,
-           transition: "all 0.3s ease",
+           transition: "all 0.4s ease",
+           overflow: "hidden",
            marginTop: "40px",
 background: "rgba(19, 47, 58, 0.3)",
 borderRadius: "20px",
 padding: "30px",
-boxShadow: "0 0 60px rgba(0,245,212,0.08)"
-
+boxShadow: "0 0 60px rgba(0,245,212,0.08)",
         }}>
 
-          
+    {modules.map((item, index) => (
+      <div
+        key={index}
+        onClick={() => {
+  const newIndex = activeIndex === index ? null : index;
+  setActiveIndex(newIndex);
 
-          {modules.map((item, index) => (
-            <div
-  key={index}
-  onClick={() => {
-    setActiveIndex(activeIndex === index ? null : index);
-  }}
+  setTimeout(() => {
+    previewRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }, 100);
+}}
+        style={{
+          background: "#132F3A",
+          padding: "25px",
+          borderRadius: "16px",
+border: activeIndex === index
+  ? "1px solid rgba(0,245,212,0.4)"
+  : "1px solid transparent",
+
+          transition: "all 0.3s ease",
+          cursor: "pointer",
+          transform: activeIndex === index ? "scale(1.02)" : "scale(1)",
+          boxShadow: activeIndex === index
+            ? "0 0 40px rgba(0,245,212,0.25)"
+            : "0 0 30px rgba(0,245,212,0.08)",
+            opacity: activeIndex === null
+  ? 1
+  : activeIndex === index
+  ? 1
+  : 0.4
+
+
+        }}
+      >
+
+        <p style={{ fontSize: "12px", color: "#00F5D4" }}>
+          {item.tech}
+        </p>
+
+        <p style={{ fontSize: "12px", opacity: 0.6 }}>
+          Status: {item.status}
+        </p>
+
+        <h4 style={{ color: "#E6F1F5" }}>
+          {item.title}
+        </h4>
+
+        <p style={{ opacity: 0.8, lineHeight: "1.6" }}>
+          {item.desc}
+        </p>
+
+        {/* EXPAND SECTION */}
+        
+
+        {/* BUTTONS */}
+        <div style={{ marginTop: "15px" }}>
+          {item.live && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(item.live, "_blank");
+              }}
+              style={{
+                marginRight: "10px",
+                padding: "6px 12px",
+                background: "#00F5D4",
+                border: "none",
+                borderRadius: "6px",
+                cursor: "pointer"
+              }}
+            >
+              Live
+            </button>
+          )}
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open(item.code, "_blank");
+            }}
+            style={{
+              padding: "6px 12px",
+              background: "#1F4D5A",
+              border: "none",
+              borderRadius: "6px",
+              color: "white",
+              cursor: "pointer"
+            }}
+          >
+            Code
+          </button>
+        </div>
+
+      </div>
+    ))}
+    
+    
+
+  </div>
+  {activeIndex !== null && (
+  <div ref={previewRef} style={{
+    marginTop: "80px",
+    padding: "30px",
+    borderRadius: "20px",
+    background: "rgba(19,47,58,0.6)",
+    backdropFilter: "blur(12px)",
+    boxShadow: "0 0 60px rgba(0,245,212,0.2)",
+    maxWidth: "900px",
+    marginLeft: "auto",
+    marginRight: "auto", 
+    transform: "translateY(30px)",
+  opacity: 1,
+  animation: "slideUp 0.5s",
+  position: "relative",
+  }}>
+    <h2 style={{ color: "#00F5D4" }}>
+      {modules[activeIndex].title}
+    </h2>
+
+    <p style={{ marginTop: "10px", opacity: 0.8 }}>
+      {modules[activeIndex].details}
+    </p>
+
+    {modules[activeIndex].image && (
+      <img
+        src={modules[activeIndex].image}
+        alt="preview"
+        style={{
+          width: "100%",
+          marginTop: "20px",
+          borderRadius: "12px",
+          boxShadow: "0 0 30px rgba(0,245,212,0.25)"
+        }}
+      />
+    )}
+
+          <div
+  onClick={() => setActiveIndex(null)}
   style={{
-    background: "#132F3A",
-    padding: "25px",
-    borderRadius: "16px",
-    boxShadow: "0 0 30px rgba(0,245,212,0.08)",
-    transition: "all 0.3s ease",
-    cursor: "pointer"
+    position: "absolute",
+    top: "15px",
+    right: "20px",
+    cursor: "pointer",
+    fontSize: "18px",
+    color: "#00F5D4"
   }}
 >
+  ✕
+</div>
 
-  <p style={{ fontSize: "12px", color: "#00F5D4" }}>
-    {item.tech}
-  </p>
-
-  <p style={{ fontSize: "12px", opacity: 0.6 }}>
-    Status: {item.status}
-  </p>
-
-  <h4 style={{ color: "#E6F1F5" }}>
-    {item.title}
-  </h4>
-
-  <p style={{ opacity: 0.8, lineHeight: "1.6" }}>
-    {item.desc}
-  </p>
-
-  {/* 🔥 EXPAND SECTION */}
-  {activeIndex === index && (
-    <div style={{
-      marginTop: "15px",
-      padding: "15px",
-      background: "rgba(0,0,0,0.25)",
-      borderRadius: "10px",
-      textAlign: "left"
-    }}>
-      <p style={{ fontSize: "14px", opacity: 0.85 }}>
-        {item.details}
-      </p>
-
-      {item.image && (
-        <img
-          src={item.image}
-          alt="project"
+    <div style={{ marginTop: "20px" }}>
+      {modules[activeIndex].live && (
+        <button
+          onClick={() => window.open(modules[activeIndex].live, "_blank")}
           style={{
-            width: "100%",
-            marginTop: "10px",
-            borderRadius: "8px"
+            marginRight: "10px",
+            padding: "8px 16px",
+            background: "#00F5D4",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer"
           }}
-        />
+        >
+          Live
+        </button>
+        
       )}
-    </div>
-  )}
 
-  {/* BUTTONS */}
-  <div style={{ marginTop: "15px" }}>
-    {item.live && (
       <button
-        onClick={(e) => {
-          e.stopPropagation();
-          window.open(item.live, "_blank");
-        }}
+        onClick={() => window.open(modules[activeIndex].code, "_blank")}
         style={{
-          marginRight: "10px",
-          padding: "6px 12px",
-          background: "#00F5D4",
+          padding: "8px 16px",
+          background: "#1F4D5A",
           border: "none",
           borderRadius: "6px",
+          color: "white",
           cursor: "pointer"
         }}
       >
-        Live
+        Code
       </button>
-    )}
 
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        window.open(item.code, "_blank");
-      }}
-      style={{
-        padding: "6px 12px",
-        background: "#1F4D5A",
-        border: "none",
-        borderRadius: "6px",
-        color: "white",
-        cursor: "pointer"
-      }}
-    >
-      Code
-    </button>
+
+    </div>
   </div>
+)}
 
 </div>
-          ))}
 
-        </div>
-      </div>
 <div style={{
   height: "1px",
   width: "60%",
